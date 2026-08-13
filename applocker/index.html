@@ -20,9 +20,8 @@
     header { text-align: center; padding: 24px 0 32px; }
     .icon {
       width: 96px; height: 96px; border-radius: 22px;
-      background: linear-gradient(135deg, #6d5dfc, #4f46e5);
-      display: inline-flex; align-items: center; justify-content: center;
-      font-size: 44px; color: #fff; font-weight: 700; margin-bottom: 16px;
+      object-fit: cover;
+      margin-bottom: 16px;
       box-shadow: 0 10px 24px rgba(79, 70, 229, .25);
     }
     h1 { font-size: 2rem; letter-spacing: -0.02em; }
@@ -33,10 +32,8 @@
     }
     .screens { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
     .shot {
-      aspect-ratio: 9 / 19; border-radius: 12px;
-      background: linear-gradient(180deg, #eef2ff, #e0e7ff);
-      display: flex; align-items: center; justify-content: center;
-      color: #a5b4fc; font-size: 13px; text-align: center; padding: 12px;
+      width: 100%; aspect-ratio: 9 / 16; border-radius: 12px;
+      object-fit: cover; background: #eef2ff;
     }
     .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
     .btn {
@@ -50,7 +47,7 @@
 <body>
   <div class="container">
     <header>
-      <div class="icon" aria-hidden="true">A</div>
+      <img class="icon" src="icon.png" alt="AppLocker icon">
       <h1>AppLocker</h1>
       <p class="tagline">Application Blocker for Android — protect access to your apps with a password or fingerprint.</p>
     </header>
@@ -67,9 +64,9 @@
     <section class="card">
       <h2>Screenshots</h2>
       <div class="screens">
-        <div class="shot">Lock screen<br>placeholder</div>
-        <div class="shot">App selection<br>placeholder</div>
-        <div class="shot">Settings<br>placeholder</div>
+        <img class="shot" src="screenshot1.jpg" alt="AppLocker lock screen">
+        <img class="shot" src="screenshot2.jpg" alt="AppLocker app selection">
+        <img class="shot" src="screenshot3.jpg" alt="AppLocker settings">
       </div>
     </section>
 
