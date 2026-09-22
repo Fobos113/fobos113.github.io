@@ -4,80 +4,120 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AppLocker — Application Blocker for Android</title>
-  <meta name="description" content="AppLocker — protect access to your Android apps with a password or fingerprint.">
+  <meta name="description" content="AppLocker protects access to your Android apps with a password or fingerprint. Block selected apps and keep them safe.">
   <style>
-    :root {
-      --bg: #f5f6f8; --card: #ffffff; --text: #1f2430; --muted: #6b7280;
-      --accent: #4f46e5; --radius: 16px;
-    }
+    :root { --bg:#f5f6f8; --card:#ffffff; --text:#1f2430; --muted:#6b7280; --accent:#4f46e5; --radius:16px; }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg); color: var(--text); line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container { max-width: 820px; margin: 0 auto; padding: 32px 20px 56px; }
-    header { text-align: center; padding: 24px 0 32px; }
-    .icon {
-      width: 96px; height: 96px; border-radius: 22px;
-      object-fit: cover;
-      margin-bottom: 16px;
-      box-shadow: 0 10px 24px rgba(79, 70, 229, .25);
-    }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    .container { max-width: 820px; margin: 0 auto; padding: 24px 20px 56px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; }
+    .langbtn { border: 1px solid var(--accent); background: transparent; color: var(--accent);
+      border-radius: 8px; padding: 4px 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .langbtn.on { background: var(--accent); color: #fff; }
+    .backlink { color: var(--muted); text-decoration: none; font-size: 14px; }
+    header { text-align: center; padding: 16px 0 8px; }
+    .icon { width: 96px; height: 96px; border-radius: 22px; object-fit: cover; margin-bottom: 14px;
+      box-shadow: 0 10px 24px rgba(79,70,229,.25); }
     h1 { font-size: 2rem; letter-spacing: -0.02em; }
-    .tagline { color: var(--muted); max-width: 540px; margin: 10px auto 0; }
-    .card {
-      background: var(--card); border-radius: var(--radius); padding: 24px; margin-top: 20px;
-      box-shadow: 0 1px 3px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.04);
-    }
-    .screens { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
-    .shot {
-      width: 100%; aspect-ratio: 9 / 16; border-radius: 12px;
-      object-fit: cover; background: #eef2ff;
-    }
+    .tagline { color: var(--muted); max-width: 600px; margin: 10px auto 0; }
+    .card { background: var(--card); border-radius: var(--radius); padding: 24px; margin-top: 20px;
+      box-shadow: 0 1px 3px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.04); }
+    h2 { font-size: 1.25rem; margin-bottom: 10px; }
+    ul { margin: 8px 0 8px 20px; }
+    .screens { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+    .shot { width: 100%; aspect-ratio: 9 / 16; border-radius: 12px; object-fit: cover; background: #eef2ff; }
     .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
-    .btn {
-      display: inline-block; padding: 10px 18px; border-radius: 10px;
-      background: var(--accent); color: #fff; text-decoration: none; font-weight: 600;
-    }
+    .btn { display: inline-block; padding: 10px 18px; border-radius: 10px; background: var(--accent);
+      color: #fff; text-decoration: none; font-weight: 600; }
     .btn.ghost { background: #eef2ff; color: var(--accent); }
     footer { text-align: center; color: var(--muted); margin-top: 32px; font-size: 14px; }
+    a { color: var(--accent); }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="topbar">
+      <a class="backlink" href="../"><span data-lang="ru">← Все приложения</span><span data-lang="en">← All apps</span></a>
+      <span>
+        <button class="langbtn" data-set="ru" onclick="setLang('ru')">РУС</button>
+        <button class="langbtn" data-set="en" onclick="setLang('en')">ENG</button>
+      </span>
+    </div>
+
     <header>
-      <img class="icon" src="icon.png" alt="AppLocker icon">
+      <img class="icon" src="icon.png" alt="AppLocker">
       <h1>AppLocker</h1>
-      <p class="tagline">Application Blocker for Android — protect access to your apps with a password or fingerprint.</p>
+      <p class="tagline" data-lang="ru">Блокировщик приложений для Android: доступ к выбранным программам
+        открывается только после пароля или подтверждения отпечатком пальца.</p>
+      <p class="tagline" data-lang="en">Application Blocker for Android — protect access to your apps with
+        a password or fingerprint.</p>
     </header>
 
-    <section class="card">
+    <section class="card" data-lang="ru">
+      <h2>Об приложении</h2>
+      <p>AppLocker позволяет заблокировать выбранные приложения и требует ввод пароля или
+        биометрическое подтверждение перед их открытием. Ваши программы остаются защищёнными,
+        даже если устройство оказалось в чужих руках.</p>
+      <ul>
+        <li>Пароль и подтверждение отпечатком пальца.</li>
+        <li>Защита от удаления приложения и обходов блокировки.</li>
+        <li>Родительский контроль: ограничение доступа ребёнка к выбранным программам.</li>
+        <li>Восстановление доступа через привязанный аккаунт.</li>
+        <li>Данные не покидают устройство: пароль и список приложений хранятся локально.</li>
+      </ul>
+    </section>
+
+    <section class="card" data-lang="en">
       <h2>About</h2>
-      <p>
-        AppLocker lets you block selected apps and requires a password or biometric verification
+      <p>AppLocker lets you block selected apps and requires a password or biometric verification
         before they can be opened. Your applications stay protected even if your device falls into
-        someone else's hands.
-      </p>
+        someone else's hands.</p>
+      <ul>
+        <li>Password and fingerprint verification.</li>
+        <li>Protection against uninstalling and bypass attempts.</li>
+        <li>Parental control for selected apps.</li>
+        <li>Access recovery via a linked account.</li>
+        <li>Data never leaves the device: password and app list are stored locally.</li>
+      </ul>
     </section>
 
     <section class="card">
-      <h2>Screenshots</h2>
+      <h2 data-lang="ru">Скриншоты</h2>
+      <h2 data-lang="en">Screenshots</h2>
       <div class="screens">
-        <img class="shot" src="screenshot1.jpg" alt="AppLocker lock screen">
-        <img class="shot" src="screenshot2.jpg" alt="AppLocker app selection">
-        <img class="shot" src="screenshot3.jpg" alt="AppLocker settings">
+        <img class="shot" src="screenshot1.jpg" alt="Экран блокировки / Lock screen">
+        <img class="shot" src="screenshot2.jpg" alt="Выбор приложений / App selection">
+        <img class="shot" src="screenshot3.jpg" alt="Настройки / Settings">
       </div>
     </section>
 
     <div class="links">
-      <a class="btn" href="privacy.html">Privacy Policy</a>
-      <a class="btn ghost" href="mailto:sabybinnv@yandex.ru">Contact</a>
+      <a class="btn" href="privacy.html"><span data-lang="ru">Политика конфиденциальности</span><span data-lang="en">Privacy Policy</span></a>
+      <a class="btn ghost" href="mailto:sabybinnv@yandex.ru"><span data-lang="ru">Написать разработчику</span><span data-lang="en">Contact</span></a>
     </div>
 
     <footer>
       <p>© 2026 AppLocker · <a href="mailto:sabybinnv@yandex.ru">sabybinnv@yandex.ru</a></p>
     </footer>
   </div>
+
+  <script>
+    function setLang(l) {
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-lang]').forEach(function (el) {
+        el.style.display = (el.getAttribute('data-lang') === l) ? '' : 'none';
+      });
+      document.querySelectorAll('.langbtn').forEach(function (b) {
+        b.classList.toggle('on', b.getAttribute('data-set') === l);
+      });
+      try { localStorage.setItem('site_lang', l); } catch (e) {}
+    }
+    (function () {
+      var l = 'en';
+      try { l = localStorage.getItem('site_lang') || 'en'; } catch (e) {}
+      setLang(l);
+    })();
+  </script>
 </body>
 </html>

@@ -18,10 +18,23 @@
     ul { margin: 8px 0 8px 20px; }
     a { color: var(--accent); }
     .back { margin-top: 20px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .langbtn { border: 1px solid var(--accent); background: transparent; color: var(--accent);
+      border-radius: 8px; padding: 4px 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .langbtn.on { background: var(--accent); color: #fff; }
+    .backlink { color: var(--muted); text-decoration: none; font-size: 14px; }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="topbar">
+      <a class="backlink" href="index.html"><span data-lang="ru">← К приложению</span><span data-lang="en">← Back to app</span></a>
+      <span>
+        <button class="langbtn" data-set="ru" onclick="setLang('ru')">РУС</button>
+        <button class="langbtn" data-set="en" onclick="setLang('en')">ENG</button>
+      </span>
+    </div>
+    <div data-lang="en">
     <h1>Privacy Policy</h1>
     <p>Last updated: August 2026</p>
 
@@ -70,6 +83,76 @@
       <p>Questions: <a href="mailto:sabybinnv@yandex.ru">sabybinnv@yandex.ru</a></p>
       <p class="back"><a href="index.html">← Back to AppLocker</a></p>
     </section>
+    </div>
+
+    <div data-lang="ru">
+      <h1>Политика конфиденциальности</h1>
+      <p>Последнее обновление: август 2026.</p>
+
+      <section class="card">
+        <h2>Общее</h2>
+        <p>AppLocker не собирает и не хранит персональные данные в своих целях. Все данные,
+          которые использует приложение, обрабатываются локально на устройстве.</p>
+      </section>
+
+      <section class="card">
+        <h2>Данные для восстановления доступа</h2>
+        <p>Чтобы обеспечить восстановление пароля, приложение может обрабатывать следующие данные
+          через сторонние сервисы:</p>
+        <ul>
+          <li>идентификатор аккаунта Google (Google Sign-In / Firebase Auth);</li>
+          <li>идентификатор аккаунта Яндекс ID;</li>
+          <li>идентификатор аккаунта VK ID;</li>
+          <li>идентификатор аккаунта Telegram;</li>
+          <li>push-токен устройства (Firebase Cloud Messaging).</li>
+        </ul>
+        <p>Эти идентификаторы используются только для подтверждения вашей личности при
+          восстановлении доступа и не передаются посторонним третьим лицам.</p>
+      </section>
+
+      <section class="card">
+        <h2>Реклама</h2>
+        <p>В бесплатной версии приложение показывает рекламу. Рекламные провайдеры могут собирать
+          обезличенные идентификаторы (например, идентификатор рекламы) для показа рекламы
+          и аналитики:</p>
+        <ul>
+          <li>Yandex Mobile Ads (РСЯ);</li>
+          <li>Unity LevelPlay (ironSource) с адаптерами Unity Ads и AppLovin.</li>
+        </ul>
+        <p>Сбросить идентификатор рекламы можно в настройках устройства.</p>
+      </section>
+
+      <section class="card">
+        <h2>Права субъекта данных</h2>
+        <p>Вы вправе получить доступ к своим персональным данным, исправить или удалить их,
+          а также возразить против обработки или ограничить её. Обращения:
+          <a href="mailto:sabybinnv@yandex.ru">sabybinnv@yandex.ru</a>.</p>
+      </section>
+
+      <section class="card">
+        <h2>Контакты</h2>
+        <p>Вопросы: <a href="mailto:sabybinnv@yandex.ru">sabybinnv@yandex.ru</a></p>
+        <p class="back"><a href="index.html">← На страницу AppLocker</a></p>
+      </section>
+    </div>
   </div>
+
+  <script>
+    function setLang(l) {
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-lang]').forEach(function (el) {
+        el.style.display = (el.getAttribute('data-lang') === l) ? '' : 'none';
+      });
+      document.querySelectorAll('.langbtn').forEach(function (b) {
+        b.classList.toggle('on', b.getAttribute('data-set') === l);
+      });
+      try { localStorage.setItem('site_lang', l); } catch (e) {}
+    }
+    (function () {
+      var l = 'en';
+      try { l = localStorage.getItem('site_lang') || 'en'; } catch (e) {}
+      setLang(l);
+    })();
+  </script>
 </body>
 </html>
