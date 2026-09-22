@@ -20,10 +20,23 @@
     table { width: 100%; border-collapse: collapse; margin-top: 8px; }
     th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #e5e7eb; font-size: 0.95rem; }
     .back { margin-top: 20px; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+    .langbtn { border: 1px solid var(--accent); background: transparent; color: var(--accent);
+      border-radius: 8px; padding: 4px 10px; font-size: 13px; font-weight: 600; cursor: pointer; }
+    .langbtn.on { background: var(--accent); color: #fff; }
+    .backlink { color: var(--muted); text-decoration: none; font-size: 14px; }
   </style>
 </head>
 <body>
   <div class="container">
+    <div class="topbar">
+      <a class="backlink" href="index.html"><span data-lang="ru">← К приложению</span><span data-lang="en">← Back to app</span></a>
+      <span>
+        <button class="langbtn" data-set="ru" onclick="setLang('ru')">РУС</button>
+        <button class="langbtn" data-set="en" onclick="setLang('en')">ENG</button>
+      </span>
+    </div>
+    <div data-lang="ru">
     <h1>Политика конфиденциальности</h1>
     <p>Приложение «Энергошашки» (пакет ru.energycheckers). Дата последнего обновления: сентябрь 2026.</p>
 
@@ -113,6 +126,93 @@
         дату в начале документа.</p>
       <p class="back"><a href="index.html">← На страницу приложения</a></p>
     </section>
+    </div>
+
+    <div data-lang="en">
+      <h1>Privacy Policy</h1>
+      <p>Energy Checkers (package ru.energycheckers). Last updated: September 2026.</p>
+
+      <section class="card">
+        <h2>Data controller</h2>
+        <p>Operator: individual entrepreneur [Name], INN [number]. Contact:
+          <a href="mailto:sabybinnv@yandex.ru">sabybinnv@yandex.ru</a>.</p>
+      </section>
+
+      <section class="card">
+        <h2>What we do not collect</h2>
+        <p>We do not collect or request your name, phone number, e-mail, precise location, contacts,
+          photos, content of other applications or bank card data.</p>
+      </section>
+
+      <section class="card">
+        <h2>What is processed</h2>
+        <ul>
+          <li><b>Game progress</b> (levels, stars, coins, skins, settings) — stored on your device only.</li>
+          <li><b>Anonymous usage statistics</b> (launches, session length, game events) — processed by
+            Yandex AppMetrica to improve the game.</li>
+          <li><b>Device information and advertising ID</b> — used for ads (Yandex Advertising Network)
+            and analytics.</li>
+          <li><b>Product id and purchase status</b> — provided by the store (RuStore, Huawei AppGallery)
+            to grant and restore purchases. We never receive card data.</li>
+        </ul>
+        <p>Permissions: internet and network state (ads, analytics), vibration (haptic feedback),
+          advertising ID. No access to files, contacts, camera or location.</p>
+      </section>
+
+      <section class="card">
+        <h2>Ads and purchases</h2>
+        <p>Ads are shown between games: interstitial, and rewarded only by your choice for a reward;
+          a banner appears in the menu and shop only — never during a game. A one-time "Remove ads"
+          purchase disables ads completely, including ad loading. You can reset your advertising ID
+          in the device settings.</p>
+      </section>
+
+      <section class="card">
+        <h2>Children</h2>
+        <p>Age rating 6+. We do not knowingly collect any data about children: no age, name or contacts
+          are requested.</p>
+      </section>
+
+      <section class="card">
+        <h2>Storage and deletion</h2>
+        <p>Game progress is stored on your device: to delete it, clear the app data in Android settings
+          or uninstall the app. Analytics data is stored by AppMetrica according to its policies.
+          Deletion requests: <a href="mailto:sabybinnv@yandex.ru">sabybinnv@yandex.ru</a> (reply within
+          30 days).</p>
+      </section>
+
+      <section class="card">
+        <h2>Your rights</h2>
+        <p>You may request information about processing, ask to correct, block or delete your data and
+          withdraw your consent. Requests:
+          <a href="mailto:sabybinnv@yandex.ru">sabybinnv@yandex.ru</a>.</p>
+      </section>
+
+      <section class="card">
+        <h2>Policy changes</h2>
+        <p>The current version is always available on this page. We update the date above when changes
+          are significant.</p>
+        <p class="back"><a href="index.html">← Back to the app page</a></p>
+      </section>
+    </div>
   </div>
+
+  <script>
+    function setLang(l) {
+      document.documentElement.lang = l;
+      document.querySelectorAll('[data-lang]').forEach(function (el) {
+        el.style.display = (el.getAttribute('data-lang') === l) ? '' : 'none';
+      });
+      document.querySelectorAll('.langbtn').forEach(function (b) {
+        b.classList.toggle('on', b.getAttribute('data-set') === l);
+      });
+      try { localStorage.setItem('site_lang', l); } catch (e) {}
+    }
+    (function () {
+      var l = 'ru';
+      try { l = localStorage.getItem('site_lang') || 'ru'; } catch (e) {}
+      setLang(l);
+    })();
+  </script>
 </body>
 </html>
